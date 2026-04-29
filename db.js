@@ -1,17 +1,15 @@
-//db.js
 const { Pool } = require("pg");
-require("dotenv").config();
 
 const pool = new Pool({
-  // This tells the app to use the cloud URL provided by Render/Neon
+  // This ignores everything else and ONLY uses the Render dashboard link
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false // This is mandatory for Neon cloud connections
+    rejectUnauthorized: false
   }
 });
 
 pool.connect()
-  .then(() => console.log("✅ Connected to Cloud PostgreSQL (Neon)"))
-  .catch((err) => console.error("❌ Database connection failed:", err));
+  .then(() => console.log("✅ Successfully connected to Neon Cloud DB"))
+  .catch((err) => console.error("❌ Still failing to connect:", err));
 
 module.exports = pool;
